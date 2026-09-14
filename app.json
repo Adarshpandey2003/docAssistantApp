@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "DocAssistant",
+    "slug": "docassistant",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./src/assets/icon.png",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#F8F9FB"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.docassistant.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#3B6EF0"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "DocAssistant uses the camera to scan your documents. Scans never leave this device."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "DocAssistant reads photos you pick so it can turn them into a PDF on this device."
+        }
+      ]
+    ],
+    "extra": {
+      "offlineFirst": true,
+      "eas": {
+        "projectId": "8f4ceaa1-b9fe-45b9-bdfe-5e4f4e950d6b"
+      }
+    },
+    "owner": "avinash12291"
+  }
+}

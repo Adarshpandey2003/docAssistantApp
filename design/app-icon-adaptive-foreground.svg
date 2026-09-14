@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background diagonal gradient: #3B6EF0 top-left to #1353D6 bottom-right -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B6EF0" />
+      <stop offset="100%" stop-color="#1353D6" />
+    </linearGradient>
+
+    <!-- Subtle document drop shadow -->
+    <filter id="docShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#082260" flood-opacity="0.32" />
+    </filter>
+
+    <!-- Teal signature drop shadow -->
+    <filter id="sigShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#05303a" flood-opacity="0.32" />
+    </filter>
+
+    <!-- Folded dog-ear shadow -->
+    <filter id="foldShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="-4" dy="-4" stdDeviation="5" flood-color="#1b3668" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- 1024x1024 full bleed diagonal gradient background -->
+  <rect width="1024" height="1024" fill="url(#bgGrad)" />
+
+  <!-- 
+    Safe Zone Specification:
+    Center: (512, 512)
+    Max Diameter: 512px (Radius = 256px, Circle bounds x: [256, 768], y: [256, 768])
+    Distance from (512, 512) must be <= 250px for all elements.
+    
+    Document Page:
+    Target size: 280px wide x 352px high
+    Center at (512, 498) so bottom swoosh sits naturally balanced around center.
+    Left = 512 - 140 = 372
+    Right = 512 + 140 = 652
+    Top = 498 - 176 = 322
+    Bottom = 498 + 176 = 674
+    Corner radius = 22px
+    Fold size = 68px
+    Right edge before fold: 674 - 68 = 606
+    Bottom edge before fold: 652 - 68 = 584
+    Fold diagonal cut: from (652, 606) to (584, 674)
+  -->
+
+  <!-- Tight Scan Corner Brackets (kept well within R=240px from (512, 512)) -->
+  <!-- Top-left bracket around (340, 290) to (372, 322) -->
+  <!-- Bottom-right bracket around (652, 674) to (684, 706) -->
+  <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" fill="none">
+    <!-- Top-left scan bracket: corner at (342, 292), extends to x=434, y=384 -->
+    <path d="M 342 384 L 342 308 A 16 16 0 0 1 358 292 L 434 292" />
+    <!-- Bottom-right scan bracket: corner at (682, 704), extends to x=590, y=612 -->
+    <path d="M 682 612 L 682 688 A 16 16 0 0 1 666 704 L 590 704" />
+  </g>
+
+  <!-- Document Body with Shadow -->
+  <g filter="url(#docShadow)">
+    <!-- Main document silhouette with dog-ear cutout -->
+    <path d="
+      M 394 322
+      L 630 322
+      A 22 22 0 0 1 652 344
+      L 652 606
+      L 584 674
+      L 394 674
+      A 22 22 0 0 1 372 652
+      L 372 344
+      A 22 22 0 0 1 394 322
+      Z"
+      fill="#FFFFFF" />
+
+    <!-- Dog-ear folded corner with rounded corner tip -->
+    <g filter="url(#foldShadow)">
+      <path d="
+        M 584 674
+        L 584 626
+        A 20 20 0 0 1 604 606
+        L 652 606
+        Z"
+        fill="#E4ECFA" />
+    </g>
+
+    <!-- Three horizontal document lines (#3B6EF0 at 25% opacity) proportionally bold -->
+    <rect x="408" y="386" width="208" height="14" rx="7" fill="#3B6EF0" fill-opacity="0.25" />
+    <rect x="408" y="422" width="172" height="14" rx="7" fill="#3B6EF0" fill-opacity="0.25" />
+    <rect x="408" y="458" width="136" height="14" rx="7" fill="#3B6EF0" fill-opacity="0.25" />
+  </g>
+
+  <!-- 
+    Signature swoosh in vibrant teal (#00A98F)
+    Scaled and centered around the lower half of document.
+    X-range: ~468 to ~696 (distance to center 512 is max 184px, well within 256px limit).
+    Y-range: ~565 to ~645 (distance to center 512 is max 133px).
+    Stroke width: 17px (proportionally bold for 48x48 icon readability).
+  -->
+  <path d="M 468 585 C 489 567, 517 552, 544 576 C 568 597, 535 646, 511 637 C 487 628, 505 589, 547 583 C 584 578, 620 602, 660 580 C 670 574, 678 568, 688 562"
+    fill="none"
+    stroke="#00A98F"
+    stroke-width="17"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#sigShadow)" />
+
+</svg>

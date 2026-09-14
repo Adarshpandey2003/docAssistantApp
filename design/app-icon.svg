@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background diagonal gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B6EF0" />
+      <stop offset="100%" stop-color="#1353D6" />
+    </linearGradient>
+
+    <!-- Subtle page depth shadow -->
+    <filter id="pageShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="16" stdDeviation="28" flood-color="#082260" flood-opacity="0.32" />
+    </filter>
+
+    <!-- Signature pop shadow -->
+    <filter id="sigShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#05303a" flood-opacity="0.35" />
+    </filter>
+
+    <!-- Document folded corner shadow -->
+    <filter id="foldShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="-6" dy="-6" stdDeviation="8" flood-color="#1b3668" flood-opacity="0.2" />
+    </filter>
+  </defs>
+
+  <!-- 1024x1024 full bleed background -->
+  <rect width="1024" height="1024" fill="url(#bgGrad)" />
+
+  <!-- 
+    Safe Zone: 66% of 1024 = ~676px centered (from x=174 to x=850, y=174 to y=850). Outer 17% (~174px) margin is preserved.
+    Document: 46% width of canvas = ~470px.
+    Let document be centered:
+    Width = 460px, Height = 580px
+    x = 282, y = 222
+  -->
+
+  <!-- Subtle scan frame brackets framing the document (35% opacity, ~8px stroke) -->
+  <g stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" fill="none">
+    <!-- Top-left scan bracket -->
+    <path d="M 230 330 L 230 200 A 24 24 0 0 1 254 176 L 384 176" />
+    <!-- Bottom-right scan bracket -->
+    <path d="M 794 694 L 794 824 A 24 24 0 0 1 770 848 L 640 848" />
+  </g>
+
+  <!-- Central Document Group with shadow -->
+  <g filter="url(#pageShadow)">
+    <!-- 
+      Page dimensions:
+      Left = 282, Top = 222, Width = 460, Height = 580
+      Right = 742, Bottom = 802
+      Corner radius = 32px for top-left, top-right, bottom-left.
+      Bottom-right fold: Fold size = 110px.
+      So right edge goes down to 802 - 110 = 692.
+      Bottom edge goes from 282+32 to 742 - 110 = 632.
+      Fold cut diagonal from (742, 692) to (632, 802).
+    -->
+    <path d="
+      M 314 222
+      L 710 222
+      A 32 32 0 0 1 742 254
+      L 742 692
+      L 632 802
+      L 314 802
+      A 32 32 0 0 1 282 770
+      L 282 254
+      A 32 32 0 0 1 314 222
+      Z" 
+      fill="#FFFFFF" />
+
+    <!-- Folded dog-ear corner -->
+    <g filter="url(#foldShadow)">
+      <!-- Dog-ear triangle with rounded edge joining the corner -->
+      <path d="
+        M 632 802
+        L 632 724
+        A 32 32 0 0 1 664 692
+        L 742 692
+        Z" 
+        fill="#E4ECFA" />
+    </g>
+
+    <!-- Three horizontal text lines in translucent blue tint (#3B6EF0 at 28% opacity) -->
+    <rect x="342" y="326" width="340" height="20" rx="10" fill="#3B6EF0" fill-opacity="0.25" />
+    <rect x="342" y="386" width="280" height="20" rx="10" fill="#3B6EF0" fill-opacity="0.25" />
+    <rect x="342" y="446" width="220" height="20" rx="10" fill="#3B6EF0" fill-opacity="0.25" />
+  </g>
+
+  <!-- 
+    Overlapping confident teal (#00A98F) signature swoosh
+    Single continuous handwritten stroke with rounded caps.
+    Overlaps lower-right / bottom of document and extends cleanly,
+    staying safely well within the 66% inner circle (x <= 840, y <= 820).
+  -->
+  <path d="M 440 655 C 475 625, 520 600, 565 640 C 605 675, 550 755, 510 740 C 470 725, 500 660, 570 650 C 630 642, 690 682, 755 645 C 772 635, 785 625, 800 615"
+    fill="none"
+    stroke="#00A98F"
+    stroke-width="26"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#sigShadow)" />
+
+</svg>
